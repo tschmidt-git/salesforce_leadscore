@@ -1,0 +1,105 @@
+(CASE lead.Controlling_Channel__c
+    WHEN 'Affiliate' THEN 0.9197
+    WHEN 'CRM' THEN 1.124
+    WHEN 'Direct' THEN 1.6043
+    WHEN 'Display' THEN 0.8925
+    WHEN 'Email' THEN 0.9197
+    WHEN 'GDN' THEN 0.9753
+    WHEN 'Misc' THEN 4.8218
+    WHEN 'SEA' THEN 1.4643
+    WHEN 'SEO' THEN 1.4598
+    WHEN 'Social' THEN 0.8513
+    ELSE 1 END)
+* (multiply)
+(CASE lead.Degree_of_suffering__c
+    WHEN 'not at all' THEN 0.5928
+    WHEN 'barely' THEN 0.8483
+    WHEN 'moderately' THEN 1.0616
+    WHEN 'severely' THEN 1.001
+    ELSE 0.8753 END)
+* (multiply)
+(CASE lead.Discreet_design__c
+    WHEN 'less important' THEN 0.9678
+    WHEN 'important' THEN 1.1001
+    WHEN 'very important' THEN 0.9327
+    ELSE 0.8702 END)
+* (multiply)
+CASE lead.credit_score__c
+WHEN 'Unknown' THEN 0.6228
+WHEN 'Poor (0-639)' THEN 0.7315
+WHEN 'Fair (640-679)' THEN 0.9803
+WHEN 'Good (680-719)' THEN 1.2263
+WHEN 'Excellent (720-850)' THEN 1.4998
+ELSE 0.8502 END)
+* (multiply)
+(CASE lead.Precise_Age_Number_BI__c
+    WHEN '[20 - 24]' THEN 0.5984
+    WHEN '[25 - 29]' THEN 0.5984
+    WHEN '[30 - 34]' THEN 0.5984
+    WHEN '[35 - 39]' THEN 0.5984
+    WHEN '[40 - 44]' THEN 0.5984
+    WHEN '[45 - 49]' THEN 0.7414
+    WHEN '[50 - 54]' THEN 0.837
+    WHEN '[55 - 59]' THEN 0.9971
+    WHEN '[60 - 64]' THEN 1.1556
+    WHEN '[65 - 69]' THEN 1.1912
+    WHEN '[70 - 74]' THEN 1.1469
+    WHEN '[75 - 79]' THEN 1.0476
+    WHEN '[80 - 84]' THEN 0.8421
+    WHEN '[85 - 89]' THEN 0.783
+    WHEN '[90 - 94]' THEN 0.6767
+    WHEN '[95 - 99]' THEN 0.6767
+    ELSE 0.8724 END)
+* (multiply)
+(CASE lead.Professional_Status__c
+    WHEN 'Employed' THEN 1.1131
+    WHEN 'Homemaker' THEN 0.6482
+    WHEN 'Retired' THEN 0.9746
+    WHEN 'Self-employed' THEN 1.2034
+    WHEN 'Unemployed' THEN 0.4199
+    ELSE 0.9013 END)
+* (multiply)
+(CASE Purchase_timeframe__c
+    WHEN 'unknown' THEN 0.6969
+    WHEN 'weeks' THEN 1.1976
+    WHEN 'months' THEN 0.969
+    WHEN 'asap' THEN 1.0617
+    ELSE 0.8673 END)
+* (multiply)
+(CASE lead.salutation
+    WHEN 'Mr.' THEN 1.1046
+    WHEN 'Ms.' THEN 0.9164
+    ELSE  0.9106 END)
+* (multiply)
+(CASE lead.Searching_For__c
+    WHEN 'Null' THEN 0.8719
+    WHEN 'self' THEN 1.0697
+    ELSE  0.6244 END)
+* (multiply)
+(CASE lead.Tinnitus__c
+    WHEN 'No' THEN 0.9232
+    WHEN 'Yes' THEN 1.1818
+    ELSE 0.8881 END)
+* (multiply)
+(CASE lead.Type_of_treatment__c
+    WHEN NULL THEN 0.9216
+    WHEN 'First care' THEN
+        (CASE lead.Why_not_sooner__c
+            WHEN 'been too busy' THEN 1.4404
+            WHEN 'cannot afford them' THEN 0.9022
+            WHEN 'need more information' THEN 1.3476
+            WHEN 'not sure if needed' THEN 1.0163
+            ELSE 0.7971
+        END)
+    WHEN 'Followup care' THEN
+        (CASE lead.Age_of_current_hearing_aid__c
+            WHEN '1' THEN 0.5201
+            WHEN '2' THEN 0.8082
+            WHEN '3' THEN 0.8382
+            WHEN '4' THEN 1.096
+            WHEN '5' THEN 1.2464
+            ELSE 0.6704
+        END)
+    ELSE 0.9216
+    END)
+*
